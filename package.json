@@ -4,13 +4,16 @@
   "description": "",
   "main": "js/index.js",
   "scripts": {
-      "start": "node js/index.js",
-      "build": "gulp build"
+    "start": "node js/index.js",
+    "build": "gulp build"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "gulp": "^4.0.2",
     "pkg": "^4.4.9"
+  },
+  "dependencies": {
+    "ws": "^7.4.1"
   }
 }
