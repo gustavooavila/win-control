@@ -24,15 +24,12 @@ class messaging {
     
     attach(){
         this.stdout.on('data', async (data)=>{
-            const message = data.toString();
-            try{
-                const json = JSON.parse(message);
-                this.emit("data", json);
-            }catch(err){
-                this.emit("message", message)
-            }
-        })
+            const message = data.toString().slice(0, -1);
+            this.emit("message", message);
+            
+        });
     }
+    
     sendMessage(message){
         this.stdin.write(message + '\r\n')
     }

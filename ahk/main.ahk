@@ -1,10 +1,9 @@
 #Singleinstance, force
 #NoTrayIcon
 
-NodeJS_Attach()
-NodeJS_Write("{""protocol"":""teste"", ""hello"": ""world""}")
 NodeJS_OnMessage(data) {
-    MsgBox % data
+    MsgBox % SubStr(data, 2, -1)
+    NodeJS_Write(SubStr(data, 2, -1))
 }
 
 #Include, messaging.ahk
