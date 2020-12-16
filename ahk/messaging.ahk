@@ -15,7 +15,6 @@ Loop {
 	if (latest = data) {
         latest = %latest%
 	} else {
-        
         FuncExist := IsFunc("NodeJS_OnMessage") 
         If FuncExist {
             NodeJS_OnMessage(data)

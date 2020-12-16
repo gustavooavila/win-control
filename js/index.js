@@ -7,8 +7,7 @@ const autohotkey = require("./autohotkey");
 const http_server = http.createServer();
 const ws_server = new WebSocket.Server({ server: http_server });
 
-const ahk_script = path.join(__dirname, "../ahk/main.ahk");
-const ahk = new autohotkey(ahk_script);
+const ahk = new autohotkey("main.ahk");
 
 ahk.on("message", function(data){ws_broadcast(data)});
 
