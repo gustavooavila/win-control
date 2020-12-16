@@ -4,6 +4,7 @@ const WebSocket = require('ws');
 const fs = require('fs');
 const path = require("path");
 const autohotkey = require("./autohotkey");
+const create_main_ahk = require("./autohotkey/main");
 
 const {plugins_path} = require("./utils/paths");
 const plugin_loader = require("./plugins");
@@ -11,7 +12,8 @@ const plugin_loader = require("./plugins");
 const http_server = http.createServer();
 const ws_server = new WebSocket.Server({ server: http_server });
 
-const ahk = new autohotkey("main.ahk");
+const plugins = new plugin_loader(plugins_path);
+const ahk = new autohotkey(create_main_ahk(plugins.list()));
 
 ahk.on("message", function(data){ws_broadcast(data)});
 
@@ -20,8 +22,6 @@ ws_server.on('connection', function connection(ws) {
         ahk.sendData(data);
     });
 });
-
-const plugins = new plugin_loader(plugins_path);
 
 http_server.on("request", function(req, res){
     const url = req.url.slice(1);
@@ -37,11 +37,8 @@ http_server.on("request", function(req, res){
 
 http_server.listen(8080);
 
-
 function ws_broadcast(data){
     ws_server.clients.forEach(function each(client) {
-        if (client.readyState === WebSocket.OPEN) {
-            client.send(data);
-            }
-        });
-    }    
+        if (client.readyState === WebSocket.OPEN) client.send(data);
+    });
+}       

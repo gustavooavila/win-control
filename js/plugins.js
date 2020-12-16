@@ -30,26 +30,22 @@ class plugins{
         if(json.name in plugin_list) return false;
         return true;
     }    
+    list(){return plugin_list}
     get_plugin(plugin_name){if(plugin_name in plugin_list)return plugin_list[plugin_name];}
 }            
 class Plugin {
     constructor(dir_path, json){
         this.dir_path = dir_path;
+        this.ahk_script = path.resolve(dir_path, "main.ahk");
         this.name = json.name;
-        this.events = json.events;
-        this.html = json.html;
-        this.ahk = json.ahk;
+        this.assets = json.assets;
     }
     
     ahk_path(){
-        const relative = path.relative(ahk_path, this.dir_path);
-        const absolute = path.resolve(ahk_path, relative);
-        return absolute;
+        return path.relative(ahk_path, this.ahk_script);
     }
     js_path(){
-        const relative = path.relative(js_path, this.dir_path);
-        const absolute = path.resolve(js_path, relative);
-        return absolute;
+        return path.relative(js_path, this.dir_path);
     }
 }
 module.exports = plugins;
