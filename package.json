@@ -1,0 +1,16 @@
+{
+  "name": "win-control",
+  "version": "1.0.0",
+  "description": "",
+  "main": "js/index.js",
+  "scripts": {
+      "start": "node js/index.js",
+      "build": "gulp build"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "pkg": "^4.4.9"
+  }
+}
