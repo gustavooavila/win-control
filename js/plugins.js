@@ -36,14 +36,13 @@ class Plugin {
         
         this.asset_list = [];
         this.load_asset_list(this.asset_root_path);
-        console.log(this.asset_list);
     }
     
     ahk_path(){
         return path.relative(ahk_path, this.ahk_script);
     }
     js_path(){
-        return path.relative(js_path, this.dir_path);
+        return path.resolve(js_path, path.relative(js_path, this.dir_path));
     }
     
     
