@@ -18,7 +18,7 @@ const ahk = new autohotkey(create_main_ahk(plugins.list()));
 ahk.on("message", function(data){ws_broadcast(data)});
 
 ws_server.on('connection', function connection(ws) {
-    ws.on('message', function incoming(data) {
+    ws.on('message', function (data) {
         ahk.sendData(data);
     });
 });
@@ -41,4 +41,4 @@ function ws_broadcast(data){
     ws_server.clients.forEach(function each(client) {
         if (client.readyState === WebSocket.OPEN) client.send(data);
     });
-}       
+}

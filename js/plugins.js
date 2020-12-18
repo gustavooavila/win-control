@@ -20,16 +20,10 @@ class plugins{
     load_plugin(dir_path){
         const json_path = path.resolve(dir_path, "package.json");
         const json = load_json(json_path);
-        if(this.validate_plugin(json)){
-            plugin_list[json.name] = new Plugin(dir_path, json);
-        }
+        
+        plugin_list[json.name] = new Plugin(dir_path, json);
     }
     
-    validate_plugin(json){
-        if(!json.name || !json.events || !json.events.length) return false
-        if(json.name in plugin_list) return false;
-        return true;
-    }    
     list(){return plugin_list}
     get_plugin(plugin_name){if(plugin_name in plugin_list)return plugin_list[plugin_name];}
 }            
@@ -37,7 +31,7 @@ class Plugin {
     constructor(dir_path, json){
         this.dir_path = dir_path;
         this.ahk_script = path.resolve(dir_path, "main.ahk");
-        this.name = json.name;
+        this.name = path.dirname(dir_path);
         this.assets = json.assets;
     }
     

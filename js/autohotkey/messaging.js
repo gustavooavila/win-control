@@ -18,7 +18,7 @@ class messaging {
         if (!fns) return false;
         fns.forEach((f) => {
             f(...args);
-        });
+            });
         return true;
     }
     
@@ -30,9 +30,6 @@ class messaging {
         });
     }
     
-    sendMessage(message){
-        this.stdin.write(message + '\r\n')
-    }
     sendData(data){
         this.stdin.write(JSON.stringify(data) + '\r\n')
     }

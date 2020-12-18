@@ -12,9 +12,6 @@ class autohotkey{
         args = [...args, script]
         this.process = spawn(interpreter_path, args, spawn_options)
         this.messaging = new messaging(this.process.stdin, this.process.stdout);
-        
-        this.alive = true;
-        this.process.on("exit", ()=>{this.alive = false;})
     }
     
     on(...params){return this.messaging.on(...params)}
