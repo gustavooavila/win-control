@@ -6,7 +6,7 @@ const path = require("path");
 const autohotkey = require("./autohotkey");
 const create_main_ahk = require("./autohotkey/main");
 
-const {plugins_path} = require("./utils/paths");
+const {plugins_path, js_path} = require("./utils/paths");
 const plugin_loader = require("./plugins");
 
 const http_server = http.createServer();
@@ -23,7 +23,7 @@ ws_server.on('connection', function connection(ws) {
     });
 });
 
-const routes = {};
+const routes = {"/AHK.js": path.resolve(js_path, "AHK.js")};
 Object.keys(plugins.list()).forEach((plugin_name)=>{
     const plugin = plugins.get_plugin(plugin_name);
     const plugin_base_path = `/${plugin_name}`; 
@@ -50,7 +50,7 @@ http_server.on("request", function(req, res){
 })
 
 
-http_server.listen(8080);
+http_server.listen(90);
 
 function ws_broadcast(data){
     ws_server.clients.forEach(function each(client) {
