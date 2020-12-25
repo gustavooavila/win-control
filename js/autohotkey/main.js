@@ -12,9 +12,11 @@ FileEncoding UTF-8
 
 ${ahk_include("includes.ahk")}
 `;
+
 const script_footer = `
 NodeJS.handle()
 `;
+
 function create_main_ahk(plugins = {}){
     plugins = create_plugins(plugins);
     
@@ -23,14 +25,17 @@ function create_main_ahk(plugins = {}){
     
     
     fs.writeSync(fd, script);
-    
     return name;
 }
 
 function create_plugins(plugins){
-    return Object.entries(plugins).reduce((acc, [plugin_name, plugin])=>{
+    return Object.entries(plugins).reduce((acc, [plugin_name, plugin]) => {
         plugin_path = plugin.ahk_path();
-        acc.push(ahk_include(plugin_path));
+        const absolute_plugin_path = path.resolve(ahk_path, plugin_path);
+        try{
+            if(fs.statSync(absolute_plugin_path).isFile()) acc.push(ahk_include(plugin_path));
+        }
+        catch(err){}
         return acc;
     },[]).join("\n");
 }
