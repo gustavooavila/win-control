@@ -1,4 +1,4 @@
-const http = require('http');
+const http = require('./http_server');
 const WebSocket = require('ws');
 
 const fs = require('fs');
@@ -9,7 +9,7 @@ const create_main_ahk = require("./autohotkey/main");
 const {plugins_path, js_path} = require("./utils/paths");
 const Plugin = require("./plugins");
 
-const http_server = http.createServer();
+const http_server = new http();
 const ws_server = new WebSocket.Server({ server: http_server });
 
 Plugin.load_plugins();
@@ -22,36 +22,6 @@ ws_server.on('connection', function connection(ws) {
         ahk.sendData(data);
     });
 });
-
-const routes = {"/AHK.js": path.resolve(js_path, "AHK.js")};
-Object.entries(Plugin.list).forEach(([plugin_name, plugin])=>{
-    const plugin_base_path = `/${plugin_name}`; 
-    routes[plugin_base_path] = path.resolve(plugin.js_path(), "index.html");
-    plugin.asset_list.forEach((asset_path)=>{
-        const url_path = plugin_base_path + "/" +asset_path.split("\\").join("/").replace("assets/","");
-        routes[url_path] = path.resolve(plugin.js_path(), asset_path);
-    });
-});
-
-http_server.on("request", function(req, res){
-    function sendFile(path){
-        try{
-            html_content = fs.readFileSync(path);
-            res.statusCode=200;
-            res.end(html_content);
-            }catch(err){
-            res.statusCode=404;
-            res.end();
-        }
-    }
-    
-    if(routes[req.url]){
-        sendFile(routes[req.url]);
-        }else{
-        res.statusCode=403;
-        res.end();
-    }
-})
 
 
 http_server.listen(90);
