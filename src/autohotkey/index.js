@@ -2,10 +2,10 @@ const path = require("path")
 const { spawn } = require("child_process");
 
 const messaging = require("./messaging");
-const {ahk_path,interpreter_path} = require("../utils/paths");
+const {plugins_path, interpreter_path} = require("../utils/paths");
 
 const stdio = ['pipe', 'pipe', process.stdout]
-const spawn_options = {windowsHide: true, cwd: ahk_path, stdio };
+const spawn_options = {windowsHide: true, cwd: plugins_path, stdio };
 
 class autohotkey{
     constructor(script, ...args){

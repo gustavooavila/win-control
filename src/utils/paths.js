@@ -4,7 +4,6 @@ const cwd = process.cwd()
 module.exports = {
     project_path: cwd,
     interpreter_path: path.resolve(cwd, "AutoHotkey.exe"),
-    ahk_path: path.resolve(root_path, "ahk"),
     js_path: path.resolve(root_path, "js"),
     plugins_path: path.resolve(root_path, "plugins")
 }

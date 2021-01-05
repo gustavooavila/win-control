@@ -23,7 +23,7 @@ class Plugin {
     }
     
     ahk_path(){
-        return path.relative(ahk_path, this.ahk_script);
+        return path.relative(plugins_path, this.ahk_script);
     }
     js_path(){
         return path.resolve(js_path, path.relative(js_path, this.dir_path));

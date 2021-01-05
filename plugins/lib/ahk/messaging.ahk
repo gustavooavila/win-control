@@ -33,28 +33,23 @@ class NodeJSMessaging{
         if(!this.listeners[event]){
             this.listeners[event] := []
         }
-        this.listeners[event].Push(Func(callback).Bind(this))
+        this.listeners[event].Push(Func(callback).bind())
     }
     
-    emitEvent(event, data){
-        if(this.listeners[event]){
-            For index, callback in this.listeners[event]
-            callback.Call(data)
+    emitEvent(data, raw_data){
+        if(this.listeners[data.event]){
+            For index, callback in this.listeners[data.event]
+            callback.Call(data, raw_data)
         }
     }
+    
     handle(){
         Loop {
             Sleep, 10
             raw_data := this.read_stdin()
             if(raw_data){
                 json_data := Jxon_Load(raw_data)
-                event_data := {}
-                For key, value in json_data {
-                    if(key != "event"){
-                        event_data[key] := value
-                    }
-                }
-                this.emitEvent(json_data["event"], event_data)
+                this.emitEvent(json_data, raw_data)
             }
         }
     }
