@@ -1,0 +1,16 @@
+.mouse{
+    display:flex;
+    flex-direction: column;
+    flex:1;
+}
+.mouse .mousePad{
+    overscroll-behavior: contain;
+    flex:8;
+}
+.mouse .mouseBtns{
+    flex:4;
+    display:flex;
+}
+.mouse .mouseBtns .mouseBtn{
+    flex:6;
+}
