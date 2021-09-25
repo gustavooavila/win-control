@@ -71,7 +71,7 @@ class media_plugin_winamp extends media_plugin{
     }
     
     vol_mute() {
-        this.volume := vol_get()
+        this.volume := this.vol_get()
         if(!this.muted) {
             return this.vol_set({"vol" : 0})
         }else {

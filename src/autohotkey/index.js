@@ -5,7 +5,7 @@ const messaging = require("./messaging");
 const {plugins_path, interpreter_path} = require("../utils/paths");
 
 const stdio = ['pipe', 'pipe', process.stdout]
-const spawn_options = {windowsHide: true, cwd: plugins_path, stdio };
+const spawn_options = {/*windowsHide: true,*/ cwd: plugins_path, stdio };
 
 class autohotkey{
     constructor(script, ...args){

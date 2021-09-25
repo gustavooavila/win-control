@@ -10,7 +10,8 @@ const script_header = `
 #NoTrayIcon
 FileEncoding UTF-8
 
-#Include, lib/ahk/Jxon.ahk
+#Include, lib/ahk/Print.ahk
+#Include, lib/ahk/JSON.ahk
 #Include, lib/ahk/messaging.ahk
 `;
 

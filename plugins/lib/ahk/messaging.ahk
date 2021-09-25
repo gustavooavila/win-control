@@ -12,7 +12,7 @@ class NodeJSMessaging{
         event_data := {event: event}
         for key, value in data
         event_data[key] := value
-        string := Jxon_Dump(event_data)
+        string := JSON.Dump(event_data)
         FileAppend, %string%`n,*
     }
     
@@ -48,7 +48,7 @@ class NodeJSMessaging{
             Sleep, 10
             raw_data := this.read_stdin()
             if(raw_data){
-                json_data := Jxon_Load(raw_data)
+                json_data := JSON.Load(raw_data)
                 this.emitEvent(json_data, raw_data)
             }
         }
