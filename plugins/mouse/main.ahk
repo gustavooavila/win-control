@@ -1,8 +1,8 @@
 onmouse(data, raw_data){
     global NodeJS
     
-    y := data.deltas.x
-    x := data.deltas.y
+    x := data.deltas.x
+    y := data.deltas.y
     btn := data.btn
     
     if(x != 0 or y != 0){

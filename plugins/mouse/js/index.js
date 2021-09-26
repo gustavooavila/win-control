@@ -25,6 +25,9 @@
                 deltas.x = ev.gesture.deltaX - this.touchstart.x;
                 deltas.y = ev.gesture.deltaY - this.touchstart.y;
                 this.sendMouse(deltas, 0)
+                
+                this.touchstart.x = ev.gesture.deltaX;
+                this.touchstart.y = ev.gesture.deltaY;
             });
             
             this.LeftMouseBtn.on("click", (ev)=>{
