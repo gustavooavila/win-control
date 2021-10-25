@@ -12,6 +12,7 @@ FileEncoding UTF-8
 
 #Include, lib/ahk/Print.ahk
 #Include, lib/ahk/JSON.ahk
+#Include, lib/ahk/Acc.ahk
 #Include, lib/ahk/messaging.ahk
 `;
 
