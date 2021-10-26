@@ -10,10 +10,21 @@ const script_header = `
 #NoTrayIcon
 FileEncoding UTF-8
 
-#Include, lib/ahk/Print.ahk
 #Include, lib/ahk/JSON.ahk
 #Include, lib/ahk/Acc.ahk
+#Include, lib/ahk/EventEmitter.ahk
+
+;WS stuff
+#Include, lib/ahk/URI.ahk
+#include, lib/ahk/Socket.ahk
+#include, lib/ahk/Crypto.ahk
+#include, lib/ahk/WSDataFrame.ahk
+#Include, lib/ahk/Buffer.ahk
+#Include, lib/ahk/HTTPClient.ahk
+#Include, lib/ahk/WSClient.ahk
+#Include, lib/ahk/WSSession.ahk
 #Include, lib/ahk/messaging.ahk
+
 `;
 
 const script_footer = `

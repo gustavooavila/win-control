@@ -1,6 +1,5 @@
-onmouse(data, raw_data){
-    global NodeJS
-    
+onmouse(data){
+    data := data.data
     x := data.deltas.x
     y := data.deltas.y
     btn := data.btn
@@ -9,10 +8,10 @@ onmouse(data, raw_data){
         MouseMove x, y, 0, R
     }
     
-    if(data.btn == 1){
+    if(btn == 1 || btn == "1"){
         MouseClick left
     }
-    if(data.btn == 2){
+    if(btn == 2 || btn == "2"){
         MouseClick right
     }
 }
