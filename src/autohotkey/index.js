@@ -1,7 +1,6 @@
 const path = require("path")
 const { spawn } = require("child_process");
 
-const messaging = require("./messaging");
 const {plugins_path, interpreter_path} = require("../utils/paths");
 
 const spawn_options = {/*windowsHide: true,*/ cwd: plugins_path, stdio: "pipe"};
