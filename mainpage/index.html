@@ -2,11 +2,74 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="css/style.css" rel="stylesheet">
     </head>
     
     <body>
         <iframe id="plugin_iframe"></iframe>
+        <div id="menu">
+            <div id="plugins_drawer"></div>
+            <div id="hamburguer">
+                <div id="nav-icon3">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+             </div>
+        </div>
+       
         
         <script src="./js/load_plugins.js" type="text/javascript"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+               const menu = document.getElementById("menu");
+               const hamburguer = document.getElementById("hamburguer");
+               hamburguer.addEventListener("click", (event) => {
+                    menu.classList.toggle("open");
+               })
+            });
+        </script>
+        <script>
+            
+            document.addEventListener("DOMContentLoaded", () => {
+                const plugin_iframe = document.getElementById("plugin_iframe");
+                const plugins_drawer = document.getElementById("plugins_drawer");
+                
+                function createPluginLink(plugin) {
+                    const { icon_path, plugin_path, name } = plugin;
+                        const a =document.createElement("a");
+                        const img = new Image();
+                        img.src = icon_path;
+                        
+                        a.setAttribute("href", plugin_path);
+                        a.appendChild(img);
+                        
+                        plugins_drawer.appendChild(a);
+                }
+                
+                load_plugins().then((plugins) => {
+                    plugins = plugins.filter((plugin)=>"icon_path" in plugin)
+                    plugins.forEach((plugin) => { createPluginLink(plugin); });
+                    plugin_iframe.setAttribute("src", plugins[0].plugin_path);
+                    
+                });
+                
+                document.addEventListener("click", (event) => {
+                    const target = event.target;
+                    if(plugins_drawer.contains(target)) {
+                        event.preventDefault();
+                        let href = target.getAttribute("href");
+                        if(!href) {
+                            href = target.parentNode.getAttribute("href"); // clicked on the `img` instead of `a`
+                        }
+                        if(plugin_iframe.getAttribute("src") !== href) {
+                            plugin_iframe.setAttribute("src", href);
+                        }
+                    }
+                })
+            });
+            
+        </script>
     </body>
 </html>
