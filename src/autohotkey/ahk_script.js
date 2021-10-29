@@ -24,6 +24,7 @@ FileEncoding UTF-8
 #Include, lib/ahk/WSClient.ahk
 #Include, lib/ahk/WSSession.ahk
 #Include, lib/ahk/messaging.ahk
+#Include, lib/ahk/Gdip_All.ahk
 
 `;
 
