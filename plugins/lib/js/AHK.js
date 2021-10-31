@@ -5,7 +5,8 @@ window.AHK = (function(){
             this.queue = [];
             this.ws = new WebSocket(`ws://${window.location.host}`);
             
-            this.ws.addEventListener("message", (data)=>{
+            this.ws.addEventListener("message", ({data})=>{
+                data = JSON.parse(data)
                 const {event: event_name, ...event_data} = data;
                 this.emitEvent(event_name, event_data);
             });
