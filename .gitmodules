@@ -1,0 +1,6 @@
+[submodule "plugins/mouse"]
+	path = plugins/mouse
+	url = https://github.com/gustavooavila/win-control-plugin-mouse.git
+[submodule "plugins/explorer"]
+	path = plugins/explorer
+	url = https://github.com/gustavooavila/win-control-plugin-explorer.git
