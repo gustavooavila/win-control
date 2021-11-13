@@ -52,7 +52,9 @@
                 load_plugins().then((plugins) => {
                     plugins = plugins.filter((plugin)=>"icon_path" in plugin)
                     plugins.forEach((plugin) => { createPluginLink(plugin); });
-                    plugin_iframe.setAttribute("src", plugins[0].plugin_path);
+                    
+                    plugin = window.location.pathname == "/" ? plugins[0].plugin_path : window.location.pathname
+                    plugin_iframe.setAttribute("src", plugin);
                     
                 });
                 
