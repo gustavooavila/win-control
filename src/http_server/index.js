@@ -15,8 +15,8 @@ class Server extends http.Server {
         
         
         this.on("request", (req, res) => {
-            const file_path = decodeURI(normalize(req.url));
-            
+            const file_path = new URL(req.url, `http://${req.headers.host}`).pathname
+            console.log(file_path)
             if(file_path == "/") {
                 const mainpage_page = this.getFile(mainpage_index);
                 mainpage_page ? this.sendFile(res, mainpage_page) : this.error404(res);
