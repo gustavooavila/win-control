@@ -1,4 +1,4 @@
-window.AHK = (function(){
+window.AHK = top.AHK || (function(){
     class AHK{
         constructor(){
             this.listeners = {};
