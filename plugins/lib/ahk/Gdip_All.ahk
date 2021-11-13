@@ -1543,7 +1543,7 @@ Gdip_SaveBitmapToFile(pBitmap, sOutput, Quality=75)
 	}
 	else
 		E := DllCall("gdiplus\GdipSaveImageToFile", Ptr, pBitmap, Ptr, &sOutput, Ptr, pCodec, "uint", p ? p : 0)
-	return E ? -5 : 0
+	return E ? E : 0
 }
 
 ;#####################################################################################

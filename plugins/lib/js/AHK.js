@@ -11,9 +11,9 @@ window.AHK = (function(){
                 this.emitEvent(event_name, event_data);
             });
             
-            this.ws.addEventListener("open", ()=>{
+            this.ws.addEventListener("open", () => {
                 this.queue.forEach((data)=>{this.ws.send(data)})
-            })
+            }, { once: true })
         }
         sendEvent(event_name, event_data){
             const data = JSON.stringify({

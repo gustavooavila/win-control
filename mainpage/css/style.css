@@ -9,7 +9,7 @@
     transition: margin-left .5s ease-in-out;
     transition-delay: 0s;
 }
-#menu.open{
+.open #menu{
     margin-left: 0px;
     transition-delay: .5s;
 }
@@ -39,7 +39,7 @@
     transition: .5s ease-in-out;
     transition-delay: .5s;
 }
-#menu.open #hamburguer{
+.open #menu #hamburguer{
     background: white;
     padding-left:25px;
     margin-left: -3px;
@@ -52,11 +52,18 @@
 #plugin_iframe{
     position: fixed;
     top: 0px;
-    left: 0px;
-    width: 100%;
+    left: 128px;
+    width: calc(100% - 128px);
     height: 100%;
     border: 0;
     outline: 0;
+    transition: all .5s ease-in-out;
+    transition-delay: 0s;
+}
+.open #plugin_iframe{
+    left: 249px;
+    width: calc(100% - 249px);
+    transition-delay: .5s;
 }
 
 #nav-icon3 {
@@ -87,18 +94,18 @@
 #nav-icon3 span:nth-child(4) {
     top: 36px;
 }
-#menu.open #nav-icon3 span:nth-child(1) {
+.open #menu #nav-icon3 span:nth-child(1) {
     top: 18px;
     width: 0%;
     left: 50%;
 }
-#menu.open #nav-icon3 span:nth-child(2) {
+.open #menu #nav-icon3 span:nth-child(2) {
     transform: rotate(45deg);
 }
-#menu.open #nav-icon3 span:nth-child(3) {
+.open #menu #nav-icon3 span:nth-child(3) {
     transform: rotate(-45deg);
 }
-#menu.open #nav-icon3 span:nth-child(4) {
+.open #menu #nav-icon3 span:nth-child(4) {
     top: 18px;
     width: 0%;
     left: 50%;
