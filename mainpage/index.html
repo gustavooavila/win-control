@@ -16,19 +16,19 @@
                     <span></span>
                     <span></span>
                 </div>
-             </div>
+            </div>
         </div>
-       
+        
         
         <script src="lib/js/AHK.js" type="text/javascript"></script>
         <script src="./js/load_plugins.js" type="text/javascript"></script>
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-               const menu = document.getElementById("menu");
-               const hamburguer = document.getElementById("hamburguer");
-               hamburguer.addEventListener("click", (event) => {
+                const menu = document.getElementById("menu");
+                const hamburguer = document.getElementById("hamburguer");
+                hamburguer.addEventListener("click", (event) => {
                     document.body.classList.toggle("open");
-               })
+                })
             });
         </script>
         <script>
@@ -39,14 +39,14 @@
                 
                 function createPluginLink(plugin) {
                     const { icon_path, plugin_path, name } = plugin;
-                        const a =document.createElement("a");
-                        const img = new Image();
-                        img.src = icon_path;
-                        
-                        a.setAttribute("href", plugin_path);
-                        a.appendChild(img);
-                        
-                        plugins_drawer.appendChild(a);
+                    const a =document.createElement("a");
+                    const img = new Image();
+                    img.src = icon_path;
+                    
+                    a.setAttribute("href", plugin_path);
+                    a.appendChild(img);
+                    
+                    plugins_drawer.appendChild(a);
                 }
                 
                 load_plugins().then((plugins) => {
@@ -71,6 +71,13 @@
                         }
                     }
                 })
+                
+                AHK.addEventListener("switch_plugin", ({data}) => {
+                    location.href = data
+                    //if(data && plugin_iframe.getAttribute("src") !== data) {
+                    //    plugin_iframe.setAttribute("src", data);
+                    //}
+                });
             });
             
         </script>
