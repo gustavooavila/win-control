@@ -16,6 +16,7 @@ FileEncoding UTF-8
 #Include, lib/ahk/Gdip_All.ahk
 #Include, lib/ahk/Graphics.ahk
 #Include, lib/ahk/EventEmitter.ahk
+#Include, lib/ahk/WinHook.ahk.ahk
 
 ;WS stuff
 #Include, lib/ahk/URI.ahk
