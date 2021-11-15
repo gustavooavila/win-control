@@ -39,11 +39,12 @@
                 
                 function createPluginLink(plugin) {
                     const { icon_path, plugin_path, name } = plugin;
-                    const a =document.createElement("a");
+                    const a = document.createElement("a");
                     const img = new Image();
                     img.src = icon_path;
                     
                     a.setAttribute("href", plugin_path);
+                    a.dataset.pluginName = name;
                     a.appendChild(img);
                     
                     plugins_drawer.appendChild(a);
@@ -62,22 +63,28 @@
                     const target = event.target;
                     if(plugins_drawer.contains(target)) {
                         event.preventDefault();
+                        let plugin_name = target.dataset.pluginName;
                         let href = target.getAttribute("href");
                         if(!href) {
                             href = target.parentNode.getAttribute("href"); // clicked on the `img` instead of `a`
                         }
-                        if(plugin_iframe.getAttribute("src") !== href) {
-                            plugin_iframe.setAttribute("src", href);
+                        if(!plugin_name){
+                            plugin_name = target.parentNode.dataset.pluginName;
                         }
+                        
+                        navigate(href);
                     }
                 })
                 
-                AHK.addEventListener("switch_plugin", ({data}) => {
-                    location.href = data
-                    //if(data && plugin_iframe.getAttribute("src") !== data) {
-                    //    plugin_iframe.setAttribute("src", data);
-                    //}
-                });
+                AHK.addEventListener("switch_plugin", ({data}) => navigate(data));
+                
+                function navigate(href) {
+                    history.pushState({}, href.replace("/", ""), href);
+                    if(plugin_iframe.getAttribute("src") !== href) {
+                        plugin_iframe.setAttribute("src", href);
+                    }
+                    window.dispatchEvent(new HashChangeEvent("hashchange")); 
+                }
             });
             
         </script>
