@@ -1,0 +1,112 @@
+*{margin:0; padding:0;}
+
+#menu{
+    position: fixed;
+    display: flex;
+    height: 100%;
+    margin-left: -121px;
+    
+    transition: margin-left .5s ease-in-out;
+    transition-delay: 0s;
+}
+.open #menu{
+    margin-left: 0px;
+    transition-delay: .5s;
+}
+#menu #plugins_drawer{
+    background: white;
+    display: flex;
+    flex-direction: column;
+    border: solid 3px black;
+}
+#menu #plugins_drawer a{
+    padding: 15px;
+    padding-left: 0px;
+}
+#menu #plugins_drawer img{
+    width: 100px;
+    height: 100px;
+}
+#menu #hamburguer{
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    margin-left: 25px;
+    margin-top: 15px;
+    
+    border: solid 3px black;
+    border-radius: 50px;
+    transition: .5s ease-in-out;
+    transition-delay: .5s;
+}
+.open #menu #hamburguer{
+    background: white;
+    padding-left:25px;
+    margin-left: -3px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-left-color: white;
+    transition-delay: 0s;
+}
+
+#plugin_iframe{
+    position: fixed;
+    top: 0px;
+    left: 128px;
+    width: calc(100% - 128px);
+    height: 100%;
+    border: 0;
+    outline: 0;
+    transition: all .5s ease-in-out;
+    transition-delay: 0s;
+}
+.open #plugin_iframe{
+    left: 249px;
+    width: calc(100% - 249px);
+    transition-delay: .5s;
+}
+
+#nav-icon3 {
+    width: 60px;
+    height: 45px;
+    position: relative;
+    transition: .5s ease-in-out;
+    top: 27.5px;
+    left: 20px;
+}
+#nav-icon3 span{
+    display: block;
+    position: absolute;
+    height: 9px;
+    width: 100%;
+    background: black;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transition: .25s ease-in-out;
+}
+#nav-icon3 span:nth-child(1) {
+    top: 0px;
+}
+#nav-icon3 span:nth-child(2),#nav-icon3 span:nth-child(3) {
+    top: 18px;
+}
+#nav-icon3 span:nth-child(4) {
+    top: 36px;
+}
+.open #menu #nav-icon3 span:nth-child(1) {
+    top: 18px;
+    width: 0%;
+    left: 50%;
+}
+.open #menu #nav-icon3 span:nth-child(2) {
+    transform: rotate(45deg);
+}
+.open #menu #nav-icon3 span:nth-child(3) {
+    transform: rotate(-45deg);
+}
+.open #menu #nav-icon3 span:nth-child(4) {
+    top: 18px;
+    width: 0%;
+    left: 50%;
+}

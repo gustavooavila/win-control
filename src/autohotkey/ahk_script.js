@@ -10,9 +10,13 @@ const script_header = `
 #NoTrayIcon
 FileEncoding UTF-8
 
+;Utilities
 #Include, lib/ahk/JSON.ahk
 #Include, lib/ahk/Acc.ahk
+#Include, lib/ahk/Gdip_All.ahk
+#Include, lib/ahk/Graphics.ahk
 #Include, lib/ahk/EventEmitter.ahk
+#Include, lib/ahk/WinHook.ahk
 
 ;WS stuff
 #Include, lib/ahk/URI.ahk
@@ -23,13 +27,13 @@ FileEncoding UTF-8
 #Include, lib/ahk/HTTPClient.ahk
 #Include, lib/ahk/WSClient.ahk
 #Include, lib/ahk/WSSession.ahk
+
 #Include, lib/ahk/messaging.ahk
 
+;Plugins
 `;
 
-const script_footer = `
-NodeJS.handle()
-`;
+const script_footer = "";
 
 function create_main_ahk(plugins = {}){
     plugins = create_plugins(plugins);

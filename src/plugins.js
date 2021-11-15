@@ -9,17 +9,30 @@ class Plugin {
         fs.readdirSync(folder_path, {withFileTypes: true}).forEach((entry)=>{
             if(entry.isDirectory()){
                 const entry_path = path.resolve(folder_path, entry.name);
-                Plugin.list[entry.name] = new Plugin(entry_path);
+                Plugin.list[entry.name] = new Plugin(entry_path, entry.name);
             }
         });
     }
-    constructor(dir_path){
+    constructor(dir_path, name){
+        this.name = name;
+        this.dirname = name;
         this.dir_path = dir_path;
         this.ahk_script = path.resolve(dir_path, "main.ahk");
-        this.asset_root_path = path.resolve(this.dir_path, "assets");
         
-        this.asset_list = [];
-        this.load_asset_list(this.asset_root_path);
+        this.parsePackage()
+    }
+    
+    parsePackage() {
+        const package_path = path.resolve(this.dir_path, "package.json")
+        this.hasPackage = fs.existsSync(package_path)
+        if(this.hasPackage) {
+            try {
+                this.package = JSON.parse(fs.readFileSync(package_path))
+                this.name = this.package.name || this.name
+                }catch(e) {
+                console.log(`ERROR: malformated package.json for plugin ${this.name}\n ${e}`);
+            }
+        }
     }
     
     ahk_path(){
@@ -28,32 +41,17 @@ class Plugin {
     js_path(){
         return path.resolve(js_path, path.relative(js_path, this.dir_path));
     }
-    
-    
-    load_asset_list(root_path){
-        if(existDirectory(root_path)){
-            
-            fs.readdirSync(root_path,{withFileTypes: true}).forEach((entry)=>{
-                const entry_path = path.resolve(root_path, entry.name);
-                if(entry.isDirectory()){
-                    this.load_asset_list(entry_path);
-                    } else if(entry.isFile()){
-                    const relative_entry_path = path.relative(this.dir_path, entry_path);
-                    this.asset_list.push(relative_entry_path);
-                }
-            });
-            
+    icon_path(){
+        // check if
+        // * plugin hasPackage
+        // * package was parsed correctly
+        // * package has icon entry
+        if(this.hasPackage && this.package && this.package.icon){
+            const icon_path = path.resolve(this.dir_path, this.package.icon);
+            if(fs.existsSync(icon_path)) return icon_path; 
         }
     }
 }
 
 
-function existDirectory(directory){
-    const exists = fs.existsSync(directory);
-    if(exists){
-        const isDirectory = fs.statSync(directory).isDirectory();
-        return isDirectory;
-    }
-    return false; 
-}
 module.exports = Plugin;
