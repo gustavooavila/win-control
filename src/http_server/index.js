@@ -30,7 +30,13 @@ class Server extends http.Server {
                 {
                     const plugin_page = this.getFile(plugin_index(file_path))
                     if(plugin_page){
-                        if(req.headers["sec-fetch-dest"] == "iframe"){
+                        let load_in_iframe;
+                        if(req.headers["referer"]){
+                           const referer_path = decodeURI(new URL(req.url, `http://${req.headers.referer}`).pathname);
+                           const iframe_dest = req.headers["sec-fetch-dest"] == "iframe";
+                           load_in_iframe = iframe_dest || ( referer_path && (referer_path == "/" || referer_path.includes(file_path)))
+                        }
+                        if(load_in_iframe) {
                             this.sendFile(res, plugin_page);
                         }else
                         {
